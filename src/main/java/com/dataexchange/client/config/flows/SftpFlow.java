@@ -1,6 +1,5 @@
 package com.dataexchange.client.config.flows;
 
-
 import com.dataexchange.client.config.model.DownloadPollerConfiguration;
 import com.dataexchange.client.config.model.UploadPollerConfiguration;
 import com.dataexchange.client.domain.util.ConnectionMonitorHelper;
