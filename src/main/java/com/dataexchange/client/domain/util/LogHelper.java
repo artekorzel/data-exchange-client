@@ -16,7 +16,7 @@ import java.util.LinkedHashSet;
 
 public final class LogHelper {
 
-    private static class ClearLogContextAdvice implements AfterReturningAdvice, ThrowsAdvice {
+    public static class ClearLogContextAdvice implements AfterReturningAdvice, ThrowsAdvice {
 
         @Override
         public void afterReturning(Object o, Method method, Object[] objects, Object o1) {
