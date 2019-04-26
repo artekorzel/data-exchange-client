@@ -1,20 +1,35 @@
 package com.dataexchange.client.domain.util;
 
 import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.annotation.After;
 import org.slf4j.MDC;
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
+import org.springframework.aop.ThrowsAdvice;
 import org.springframework.integration.handler.advice.AbstractHandleMessageAdvice;
 import org.springframework.messaging.Message;
 import org.springframework.util.StringUtils;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
 public final class LogHelper {
 
-    public static AfterReturningAdvice clearLogContext() {
-        return (returnValue, method, args, target) -> MDC.clear();
+    private static class ClearLogContextAdvice implements AfterReturningAdvice, ThrowsAdvice {
+
+        @Override
+        public void afterReturning(Object o, Method method, Object[] objects, Object o1) {
+            MDC.clear();
+        }
+
+        public void afterThrowing(Exception ex) {
+            MDC.clear();
+        }
+    }
+
+    public static ClearLogContextAdvice clearLogContext() {
+        return new ClearLogContextAdvice();
     }
 
     public static MethodBeforeAdvice encrichLogsWithConnectionInfo(String username, String folder) {
