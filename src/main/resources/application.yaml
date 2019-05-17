@@ -1,10 +1,18 @@
 spring:
+#  profiles:
+#    active: test
   application:
     name: data-exchange-client
   jackson:
     serialization:
       write_dates_as_timestamps: false
 management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
   health:
     elasticsearch:
       enabled: false

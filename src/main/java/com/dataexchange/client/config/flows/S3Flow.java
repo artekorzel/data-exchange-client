@@ -40,7 +40,7 @@ public class S3Flow {
     public void uploadSetup(String configName, S3Configuration config) {
         IntegrationFlowBuilder s3Flow = IntegrationFlows
                 .from(Files.inboundAdapter(new File(config.getInputFolder())).preventDuplicates(true).autoCreateDirectory(true),
-                        secondsPoller(30, 200))
+                        secondsPoller(30))
                 .enrichHeaders(h -> h.headerExpression(FileHeaders.ORIGINAL_FILE, "payload.path"))
                 .handle(s3UploadAdapter(config))
                 .handle(message -> {
