@@ -107,7 +107,7 @@ public class SftpFlow {
         return Sftp.outboundAdapter(sftpSessionFactory)
                 .autoCreateDirectory(true)
                 .useTemporaryFileName(true)
-                .temporaryFileSuffix(".uploading")
+                .temporaryFileSuffix(config.isUseTempPrefix() ? "" : ".uploading")
                 .remoteDirectory(config.getRemoteOutputFolder());
     }
 

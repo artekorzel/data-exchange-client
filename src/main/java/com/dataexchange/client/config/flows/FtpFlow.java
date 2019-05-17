@@ -103,7 +103,7 @@ public class FtpFlow {
         return Ftp.outboundAdapter(ftpSessionFactory)
                 .autoCreateDirectory(true)
                 .useTemporaryFileName(true)
-                .temporaryFileSuffix(".uploading")
+                .temporaryFileSuffix(config.isUseTempPrefix() ? "" : ".uploading")
                 .remoteDirectory(config.getRemoteOutputFolder());
     }
 
